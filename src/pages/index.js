@@ -1,9 +1,9 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import Image from 'next/image'
 import Layout from '@/components/Layout'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
-import Link from 'next/link'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -13,23 +13,28 @@ export default function Home({ topics }) {
       <Head>
         <title>Simple Blog</title>
       </Head>
-      <main>
-        <Link href='/'>Blog's News</Link>  
+      <main className={styles.main}>
+        <Link href='/'><h1 className={styles.mainTitle}>Blog's News</h1></Link>  
+        <div className={styles.container}>
         {
           topics && topics.map((item, index) => {
             return (
-              <article key={index}>
-                <img 
-                  src={item.urlToImage}
-                  alt={`description of ${item.title}`}
-                  loading='lazy'
-                />
-                <h2>{item.title}</h2>
-                <p>{item.description}</p>
+              <article 
+                className={styles.card}
+                key={index}>
+                  <img 
+                      src={item.urlToImage}
+                      alt={`description of ${item.title}`}
+                      loading='lazy'
+                      className={styles.image}
+                    />
+                    <h2 className={styles.title}>{item.title}</h2>
+                    <p className={styles.description}>{item.description}</p>
               </article>
             )
-          }).slice(0 ,11)
+          }).slice(0 ,21)
         }
+        </div>
       </main>
     </Layout>
   )
